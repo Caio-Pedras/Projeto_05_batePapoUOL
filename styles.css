@@ -49,6 +49,7 @@ width: 100%;
 footer ion-icon{
     width: 26px;
     height: 26px;
+    cursor: pointer;
 }
 footer input{
     width: 100%;
@@ -72,12 +73,72 @@ footer input::placeholder{
     display: flex;
     align-items: center;
     padding: 14px 10px;
-    
+    word-break: break-all;
 }
 .status{
     background-color: #DCDCDC;
-    ;
 }
 .private{
     background-color: #FFDEDE;
+}
+.mensagem span{
+    color: #AAAAAA;
+}
+
+.messageInterface{
+    z-index: 1;
+    display:flex;
+    position: fixed;
+    height: 100vh;
+    font-size: 20px;
+    font-weight: 700;
+    width: 100%;
+    left: 0;
+    top:0
+}
+.filter{
+    background: #00000099;
+    filter: opacity(70%);
+    width: 35%;
+}
+.interface{
+    background-color:  #FFFFFF;
+    padding: 10px 20px;
+    width: 65%;
+}
+.interface ion-icon{
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+.users{
+    margin-top: 30px;
+    font-weight: 400;
+}
+.user{
+    display: flex;
+    align-items: center;
+}
+.userType{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.visibility{
+    font-weight: 400;
+}
+.visibilityType{
+    display: flex;
+    align-items: center;
+
+}
+.title{
+    margin: 30px 0;
+    text-align: center;
+}
+.selected{
+    color:#28BB25;   
+}
+.hidden{
+    display:none
 }
