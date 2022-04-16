@@ -16,45 +16,54 @@
 
     <header>
         <img src="./Img/logo.svg">
-        <ion-icon name="people"></ion-icon>
+        <ion-icon name="people" onclick='toggleHidden(".messageInterface")'></ion-icon>
     </header>
+
+    <div class="loginInput">
+        <img src="./Img/logoLogin.svg" class="logo">
+        <div class="loginBox">
+            <input type="text" placeholder="Digite seu nome">
+            <button onclick="logIn ()">Entrar</button>
+        </div>
+        <div class="loading hidden">
+            <img src="./Img/12-127874_stock-loading-svg-circle-loading-png-removebg-preview.png">
+            <p>Entrando...</p>
+        </div>
+    </div>  
+
     <div class="messageInterface hidden">
-        <div class="filter"></div>
+        <div class="filter" onclick='toggleHidden(".messageInterface")'></div>
         <div class="interface">
             <div class="title">
                 <p>Escolha um contato</p>
                 <p>para enviar mensagem:</p>
             </div>
             <div class="users">
-                <div class="userType">
-                    <div class="user">
-                        <ion-icon name="people"></ion-icon>
-                        <p>Todos</p>
-                    </div>
-                    <div class="selected">
-                        <ion-icon name="checkmark"></ion-icon>
-                    </div>
-                </div>
-                <div class="userType">
-                    <div class="userType">
-                        <ion-icon name="people"></ion-icon>
-                        <p>João</p>
-                    </div>
-                </div>    
-                    
             </div>
             <div class="title">
                 <p>Escolha a visibilidade</p>
             </div>
-            <div class="visibility">
+            <div class="visibilityList">
                 <div class="visibilityType">
-                    <ion-icon name="lock-open"></ion-icon>
-                    <p>Público</p>
-                   
+                    <div class="visibility">
+                        <ion-icon name="lock-open"></ion-icon>
+                        <p>Público</p>
+                    </div>
+
+                    <div class="selected">
+                        
+                    </div>
                 </div>
                 <div class="visibilityType">
-                    <ion-icon name="lock-open"></ion-icon>
-                    <p>Reservadamente</p>
+                    <div class="visibility">
+                        <ion-icon name="lock-open"></ion-icon>
+                        <p>Reservadamente</p>
+                    </div>
+                        <div class="selected">
+                            <ion-icon name="checkmark"></ion-icon>
+                        </div>
+                    </div>
+                   
                 </div>
 
             </div>
@@ -66,7 +75,7 @@
 
     <footer>
         <input type="text" placeholder="Escreva aqui...">
-        <ion-icon name="paper-plane-outline" onclick="displayHidden()"></ion-icon>
+        <ion-icon name="paper-plane-outline" onclick="sendMessage ()" ></ion-icon>
     </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;  
-
+  font-family: 'Roboto', sans-serif;
 }
 header{
 background-color: #FFFFFF;
@@ -20,13 +20,13 @@ width: 100%;
 header ion-icon{
     width: 45px;
     height: 45px;
+    cursor:pointer
 }
 body{
     background-color: #E7E7E7;
     font-family: 'Roboto', sans-serif;
 }
 .container{
-
 margin-top: 100px;
 margin-bottom: 84px;
 }
@@ -78,13 +78,12 @@ footer input::placeholder{
 .status{
     background-color: #DCDCDC;
 }
-.private{
+.reservadamente{
     background-color: #FFDEDE;
 }
 .mensagem span{
     color: #AAAAAA;
 }
-
 .messageInterface{
     z-index: 1;
     display:flex;
@@ -99,17 +98,19 @@ footer input::placeholder{
 .filter{
     background: #00000099;
     filter: opacity(70%);
-    width: 35%;
+    width: 30%;
+    cursor: pointer;
 }
 .interface{
     background-color:  #FFFFFF;
     padding: 10px 20px;
-    width: 65%;
+    width: 70%;
 }
 .interface ion-icon{
     width: 25px;
     height: 25px;
     margin-right: 8px;
+    
 }
 .users{
     margin-top: 30px;
@@ -119,18 +120,28 @@ footer input::placeholder{
     display: flex;
     align-items: center;
 }
+.all{
+    display: flex;
+    align-items: center;
+}
 .userType{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.visibilityList{
+    font-weight: 400;
+}
+.visibilityType{
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .visibility{
-    font-weight: 400;
-}
-.visibilityType{
     display: flex;
     align-items: center;
-
 }
 .title{
     margin: 30px 0;
@@ -139,6 +150,75 @@ footer input::placeholder{
 .selected{
     color:#28BB25;   
 }
+
+.loginInput{
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo{
+    width: 130px;
+    height: 92px;
+    margin-top: 150px;
+}
+.loginBox{
+    text-align: center;
+}
+.loginBox input {
+    width: 70%;
+    height: 60px;
+    margin-top: 100px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid #D7D7D7
+}
+.loginInput input::placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #AEAEAE;
+}
+.loginInput button {
+    width: 30%;
+    margin-top: 20px;
+    height: 44px;
+    background-color: #E7E7E7;
+    color: #696969;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 6px;
+    border: 1px solid #D7D7D7;
+    text-align: center;
+}
+.loginInput .loading{
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align: center;
+    font-weight: 400;
+
+}
+
+.loginInput .loading img{
+    width: 140px;
+    height: 140px;
+    animation: girandoGirandoGirando 3s infinite linear;
+}
 .hidden{
-    display:none
+    display:none;
+}
+@keyframes girandoGirandoGirando {
+    0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
 }
