@@ -14,6 +14,7 @@ document.addEventListener("keypress", function(e){
         }
     }
 })
+
 //funções
 function apiMessage (){
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages')
@@ -99,7 +100,7 @@ function sendMessage (){
         let  messageReceiver = document.querySelector('.users .selected')
 
         if (messageReceiver === null){
-            alert ('O usuário saiu da sala')
+            alert ('O usuário saiu da sala, selecione para quem você quer enviar mensagem')
             return
         }
 
@@ -180,8 +181,6 @@ function loadUserList (success) {
     document.querySelector('.users').innerHTML = innerHTML
     selectedUser = document.querySelector('.users .selected p');
 }
-
-
 function windowReload(){
     window.location.reload()
 }
@@ -197,4 +196,5 @@ function selection (selected, type){
     }
     selected.classList.add(`selected`);
     selected.querySelector('.selectedIcon').classList.remove(`hidden`);
+    document.querySelector('footer span').innerHTML = `Enviando para ${document.querySelector('.users .selected').innerText} (${document.querySelector('.visibilityList .selected').innerText})`
 }
