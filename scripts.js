@@ -1,14 +1,17 @@
 //start
 let userName ='';
 let lastMessage;
-apiMessage()
-userList ()
+let loginInputIsDisplayed = true;
 setInterval(keepOnLine, 4000)
 setInterval(apiMessage,3000)
 setInterval(userList,10000)
 document.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
+        if (loginInputIsDisplayed === true){
+            logIn ();
+        } else{
         sendMessage();
+        }
     }
 })
 //funções
@@ -34,13 +37,13 @@ function loadMessage (success){
             type:success.data[i].type,
             time:success.data[i].time,
         }
-        if (data.type !== 'Reservadamente'){
+        if (data.type !== 'private_message'){
             mensagem += `<div class="mensagem ${data.type}">
             <p><span>(${data.time})</span> <strong> ${data.from}</strong> para <strong>${data.to}</strong>: ${data.text} </p>
             </div>`
-        } else if (data.type === 'Reservadamente' && data.to === userName) {
+        } else if (data.type === 'private_message' && (data.to === userName || data.from === userName)) {
             mensagem  += `<div class="mensagem ${data.type}">
-            <p><span>(${data.time})</span> <strong> ${data.from}</strong> para <strong>${data.to}</strong>: ${data.text} </p>
+            <p><span>(${data.time})</span> <strong> ${data.from}</strong> reservadamente para <strong>${data.to}</strong>: ${data.text} </p>
             </div>`
         }
     }
@@ -70,6 +73,9 @@ function sendUserName(){
 }
 function logInDone(){
     toggleHidden('.loginInput')
+    loginInputIsDisplayed = false;
+    userList()
+    apiMessage()
 }
 function userAlreadyTaken(erro) {
 	toggleHidden('.loginBox')
@@ -86,14 +92,27 @@ function keepOnLine(){
         promiseSendUser.catch(windowReload)
     }
 }
+//document.querySelector('.users .selected').innerText
 function sendMessage (){
     if (userName!== '' && document.querySelector('footer input').value !==''){
+        let messageType = document.querySelector('.visibilityList .selected p').innerText
+        let  messageReceiver = document.querySelector('.users .selected')
+
+        if (messageReceiver === null){
+            alert ('O usuário saiu da sala')
+            return
+        }
+
         let message = {
             from:userName,
-            to:'Todos',
+            to:messageReceiver.innerText,
             text:document.querySelector('footer input').value,
             type:'message',
         }
+        if (messageType === 'Reservadamente'){
+            message.type = 'private_message'
+        }
+
         const promiseSendMessage=axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', message)
         document.querySelector('footer input').value = ""
         promiseSendMessage.then(apiMessage)    
@@ -105,31 +124,61 @@ function userList () {
     promise.then(loadUserList);
 }
 function loadUserList (success) {
-
-    let innerHTML = ""; 
-     innerHTML =  
-    `<div class="userType">
-        <div class="all">
-            <ion-icon name="people"></ion-icon>
-            <p>Todos</p>
-        </div>
-    </div>`
+    let selectedUser = document.querySelector('.users .selected p');
+    let check =''
+    let checkIcon =''
+    if (selectedUser.innerHTML === 'Todos' || selectedUser === null ){
+        check = 'selected'
+    } else {
+        checkIcon = 'hidden'
+    }
+    let innerHTML = 
+        `<div class="userType ${check}" onclick="selection(this, 'users')">
+            <div class="user" >
+                <ion-icon name="people"></ion-icon>
+                <p>Todos</p>
+            </div>
+            <div class="selectedIcon ${checkIcon}">
+                <ion-icon name="checkmark"></ion-icon>
+            </div>
+        </div>`     
     let userList = {
         name:"",
     } 
+
     for (let i = 0;  i < success.data.length; i++ ){
+
        userList={
            name:success.data[i].name,
         }
+
+        if (success.data[i].name === selectedUser.innerHTML) {
         innerHTML += 
-        `<div class="userType">
-            <div class="user">
+        `<div class="userType selected" onclick="selection(this, 'users')">
+            <div class="user" >
                 <ion-icon name="people"></ion-icon>
              <p>${userList.name}</p>
             </div>
+            <div class="selectedIcon">
+                <ion-icon name="checkmark"></ion-icon>
+            </div>
         </div>`
+        } else{
+            innerHTML += 
+            `<div class="userType" onclick="selection(this, 'users')">
+            <div class="user" >
+                <ion-icon name="people"></ion-icon>
+             <p>${userList.name}</p>
+            </div>
+            <div class="selectedIcon hidden">
+                <ion-icon name="checkmark"></ion-icon>
+            </div>
+        </div>`
+        }
+
     }
     document.querySelector('.users').innerHTML = innerHTML
+    selectedUser = document.querySelector('.users .selected p');
 }
 
 
@@ -140,3 +189,12 @@ function toggleHidden(element){
     document.querySelector(element).classList.toggle('hidden')
 }
 
+function selection (selected, type){
+    let verify = document.querySelector(`.${type} .selected`)
+    if (verify !== null) {
+        verify.querySelector('.selectedIcon').classList.add(`hidden`);
+        verify.classList.remove(`selected`)
+    }
+    selected.classList.add(`selected`);
+    selected.querySelector('.selectedIcon').classList.remove(`hidden`);
+}

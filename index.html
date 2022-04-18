@@ -32,34 +32,43 @@
     </div>  
 
     <div class="messageInterface hidden">
-        <div class="filter" onclick='toggleHidden(".messageInterface")'></div>
+        <div class="filter" onclick='toggleHidden(".messageInterface")'>
+        </div>
         <div class="interface">
             <div class="title">
                 <p>Escolha um contato</p>
                 <p>para enviar mensagem:</p>
             </div>
             <div class="users">
+                <div class="userType selected" onclick="selection(this, 'users')">
+                    <div class="user" >
+                        <ion-icon name="people"></ion-icon>
+                        <p>Todos</p>
+                    </div>
+                    <div class="selectedIcon">
+                        <ion-icon name="checkmark"></ion-icon>
+                    </div>
+                </div>
             </div>
             <div class="title">
                 <p>Escolha a visibilidade</p>
             </div>
             <div class="visibilityList">
-                <div class="visibilityType">
-                    <div class="visibility">
+                <div class="visibilityType selected" onclick= "selection (this, 'visibilityList')">
+                    <div class="visibility" >
                         <ion-icon name="lock-open"></ion-icon>
                         <p>Público</p>
                     </div>
-
-                    <div class="selected">
-                        
+                    <div class="selectedIcon">
+                        <ion-icon name="checkmark"></ion-icon>
                     </div>
                 </div>
-                <div class="visibilityType">
-                    <div class="visibility">
+                <div class="visibilityType"onclick= "selection(this, 'visibilityList')">
+                    <div class="visibility" >
                         <ion-icon name="lock-open"></ion-icon>
                         <p>Reservadamente</p>
                     </div>
-                        <div class="selected">
+                        <div class="selectedIcon hidden">
                             <ion-icon name="checkmark"></ion-icon>
                         </div>
                     </div>
